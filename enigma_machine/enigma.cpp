@@ -1,11 +1,31 @@
+#include<string.h>
+#include<fstream>
 #define Nchars 69  // Total number of encipherable characters
 #define Mchars 70  // Buffer size for strings containing Nchars
 #define Nrotors 11 // Maximum number of rotors (1-based: 1-10)
 #define Nrefls 5   // Total number of reflectors (1-based: 1-4)
 #define Nsteps 11  // Maximum total number of encryption steps
                    // = 2*4 (rotors) + 2 (plugboard) + 1 (reflector)
-
- 
+//Adds function prototypes
+void SetPlugboard();
+void SetRotorsAndReflector();
+void SetRotorPositions();
+void ReportMachine();
+void ProcessPlainText();
+int OpenFiles( char *, char *, char * );
+void CloseFiles();
+void ShowRotors();
+void PlaceRotor( int, int );
+int index( char  );
+int ChrToInt( char );
+int mod( int , int );
+void ShowWindow();
+void ShowSteps();
+char encrypt( char  );
+char RtoLpath( char , int ); 
+char LtoRpath( char , int );
+void turn();
+void TurnRot( int , int );
 char *ROTOR[ Nrotors ]  // Wirings of the rotors
 
    = {
@@ -194,7 +214,7 @@ int OpenFiles( char *inFname,
 
 void CloseFiles()
 {
-   fclose( InFp ); fclose( OutFp ); fclose( LogFp );
+   fclose( inFp ); fclose( outFp ); fclose( logFp );
 }
 
 void ReportMachine()
@@ -422,8 +442,8 @@ void ShowWindow()
    int i;
  
    for ( i = mRotors; i >= 1; --i )
-      fprintf( LogFp, "%c ", window[ i ] );
-   fprintf( LogFp, "  " );
+      fprintf( logFp, "%c ", window[ i ] );
+   fprintf( logFp, "  " );
 }
 
 void ShowSteps()
@@ -431,7 +451,7 @@ void ShowSteps()
    int i;
  
    for ( i = 0; i < mSteps; ++i )
-     fprintf( LogFp, " -> %c", step[ i ] );
+     fprintf( logFp, " -> %c", step[ i ] );
 }
 
 char encrypt( char c )
@@ -462,7 +482,7 @@ void turn()   // determine which rotors must turn
 
 {
     int doit[ Nrotors ], n;
-   char *r1 = RotWiring[ 1 ];, *r2 = RotWiring[ 2 ];, *r3;
+   char *r1 = RotWiring[ 1 ], *r2 = RotWiring[ 2 ], *r3;
  
    if ( mRotors > 3 )
       r3 = RotWiring[ 3 ];
@@ -470,7 +490,7 @@ void turn()   // determine which rotors must turn
     // calculate stepwidth for each rotor
 
     doit[ 1 ] = 1;
-    for ( i = 2; i <= mRotors; ++i )
+    for ( int i = 2; i <= mRotors; ++i )
        doit[ i ] = 0;
     if ( (RotNotch[ 1 ] == r1[ RotPos[ 1 ] ])
          ||

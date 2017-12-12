@@ -1,0 +1,19 @@
+Plugboard mappings:
+abcdefghijklmnopqrstuvwxyz0123456789.,:; ()[]'"-+/*&~`!@#$%^_={}|\<>?
+abcdefghijklmnopqrstuvwxyz0123456789.,:; ()[]'"-+/*&~`!@#$%^_={}|\<>?
+
+Rotor wirings:
+position rotor ring setting notch sequence
+       3     3            a     v bdfhjlcprtxvznyeiwgakmusqo13579,2(['/-&;*48+60.:"]) ?><\|}{=^_%$#@!`~
+       2     2            a     e ajdksiruxblhwtmcqgznpyfvoe093.]8["/1,7+':2)6&;(*5- 4?><\|}{=^_%$#@!`~
+       1     1            a     q ekmflgdqvzntowyhxuspaibrcj4.:5,63)-&;' +*7/"](081[29?><\|}{=^_%$#@!`~
+
+reflector  yruhqsldpxngokmiebfzcwvjat*["7)],3(/;6 .:8415&2+-90'?<>\|}{=_^%$#@`!~
+
+rotors:
+3: bdfhjlcprtxvznyeiwg->akmusqo13579,2(['/-&;*48+60.:"]) ?><\|}{=^_%$#@!`~
+2: ->ajdksiruxblhwtmcqgznpyfvoe093.]8["/1,7+':2)6&;(*5- 4?><\|}{=^_%$#@!`~
+1: ekmflgdqvzntowyhxusp->aibrcj4.:5,63)-&;' +*7/"](081[29?><\|}{=^_%$#@!`~
+
+
+Encryption

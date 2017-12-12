@@ -26,7 +26,7 @@ char RtoLpath( char , int );
 char LtoRpath( char , int );
 void turn();
 void TurnRot( int , int );
-char *ROTOR[ Nrotors ]  // Wirings of the rotors
+const char *ROTOR[ Nrotors ]  // Wirings of the rotors
 
    = {
      // input alphabet ("rotor" 0, not used)
@@ -76,7 +76,7 @@ char *ROTOR[ Nrotors ]  // Wirings of the rotors
 char NOTCH[ Nrotors ]
      = { 'z', 'q', 'e', 'v', 'j', 'z', 'z', 'z', 'z', 'a', 'a' };
  
-char *REFLECTOR[ Nrefls ]  // Reflectors
+const char *REFLECTOR[ Nrefls ]  // Reflectors
 
    = {
      // input alphabet ("REFLECTOR" 0, not used)
@@ -96,12 +96,12 @@ char *REFLECTOR[ Nrefls ]  // Reflectors
      "rdobjntkvehmlfcwzrxgyipsuq[3 19;'.-47:,52+&0/6*8(]\")?<>\\|}{=_^%$#@`!~"
      };
  
-char *PLUGBOARD  // Default wirings of the plugboard
+const char *PLUGBOARD  // Default wirings of the plugboard
 
      =
      "abcdefghijklmnopqrstuvwxyz0123456789.,:; ()[]'\"-+/*&~`!@#$%^_={}|\\<>?";
  
-char *alphabet  // Input alphabet
+const char *alphabet  // Input alphabet
 
      =
      "abcdefghijklmnopqrstuvwxyz0123456789.,:; ()[]'\"-+/*&~`!@#$%^_={}|\\<>?";
@@ -159,12 +159,12 @@ void InitEnigma() // Default initialization
    mSteps = (mRotors << 1) + 3;
    strcpy( plugboard, PLUGBOARD );
    for ( i = 0; i <= mRotors; ++i ) {
-      RotWiring[ i ] = ROTOR[ i ];
+      RotWiring[ i ] = (char*)ROTOR[ i ];
       RotNotch[ i ] = NOTCH[ i ];
       RotNumber[ i ] = i;
       Iwindow[ i ] = window[ i ] = 'a';
    }
-   reflector = REFLECTOR[ 1 ];
+   reflector = (char*)REFLECTOR[ 1 ];
    ReflType = 1;
 }
 
@@ -182,13 +182,13 @@ void TryUserSetup()
    }
 }
 
-void ProcessFile( char *inFname,
-                  char *encFname,
-                  char *logFname )
+void ProcessFile( const char *inFname,
+                  const char *encFname,
+                  const char *logFname )
 {
-   if ( OpenFiles( inFname,
-                   encFname,
-                   logFname ) ) {
+   if ( OpenFiles( (char*)inFname,
+                   (char*)encFname,
+                   (char*)logFname ) ) {
       SetRotorPositions();
       ReportMachine();
       ProcessPlainText();   
@@ -346,7 +346,7 @@ void SetRotorsAndReflector()
       case 'c': n = 2; break;      case 'B': n = 3; break;
       case 'C': n = 4; break;       default: n = 0; break;
    }
-   reflector = REFLECTOR[ n ];
+   reflector = (char*)REFLECTOR[ n ];
    ReflType = i;
 }
 
@@ -374,7 +374,7 @@ void PlaceRotor( int position, int r )
 // set wirings of a single rotor
 
 {
-   RotWiring[ position ] = ROTOR[ r ];
+   RotWiring[ position ] = (char*)ROTOR[ r ];
    RotNotch[ position ] = NOTCH[ r ];
    RotNumber[ position ] = r;
 }

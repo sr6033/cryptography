@@ -7,8 +7,6 @@
  	          
 
 ```
-
-# cryptography
 Various cryptography concept implementations
 
 ## Contributions
